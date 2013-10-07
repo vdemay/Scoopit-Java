@@ -8,9 +8,12 @@ import com.scoopit.model.User;
 
 public class GetTopicAndUser {
 	public static void main(String[] args) {
+		//get yours on https://www.scoop.it/dev/apps
 		ScoopClient scoopit = new ScoopClient(
 				"<yourkey>",
 				"<yoursecret>");
+		
+		
 		try {
 			Topic t = scoopit.getTopic(9014);
 			System.out.println(t);
