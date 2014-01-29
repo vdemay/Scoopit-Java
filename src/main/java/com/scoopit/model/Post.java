@@ -27,7 +27,7 @@ public class Post {
 	public String imageSize;
 	public String imagePosition;
 	public List<String> imageUrls;
-	public List<TopicTag> tags;
+    public List<String> tags;
 	public Integer commentsCount;
 	public Boolean isUserSuggestion;
 	public Long pageViews;
