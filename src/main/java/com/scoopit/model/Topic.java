@@ -29,4 +29,9 @@ public class Topic {
 	public List<Post> curatedPosts;
 	public List<TopicTag> tags;
 	public Stats stats;
+
+    @Override
+    public String toString() {
+        return "[" + id + "]" + name;
+    }
 }
