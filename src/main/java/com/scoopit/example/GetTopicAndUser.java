@@ -7,26 +7,19 @@ import com.scoopit.model.Topic;
 import com.scoopit.model.User;
 
 public class GetTopicAndUser {
-	public static void main(String[] args) {
-		//get yours on https://www.scoop.it/dev/apps
-		ScoopClient scoopit = new ScoopClient(
-				"<yourkey>",
-				"<yoursecret>");
-		
-		
-		try {
-			Topic t = scoopit.getTopic(9014);
-			System.out.println(t);
-			for (Post p : t.curatedPosts) {
-				System.out.println(p);
-			}
-			System.out.println("============******===========");
-			User u = scoopit.getUser((long) 0);
-			System.out.println(u);
+    public static void main(String[] args) throws ScoopApiExecutionException {
+        // get yours on https://www.scoop.it/dev/apps
+        ScoopClient scoopit = new ScoopClient("<youapikey>", "<youapisecret>");
 
-		} catch (ScoopApiExecutionException e) {
-			e.printStackTrace();
-		}
+        System.out.println("============******===========");
+        Topic t = scoopit.getTopic(9014);
+        System.out.println(t);
+        for (Post p : t.curatedPosts) {
+            System.out.println(p);
+        }
+        System.out.println("============******===========");
+        User u = scoopit.getUser(0l);
+        System.out.println(u);
 
-	}
+    }
 }
