@@ -1,16 +1,3 @@
 .classpath
 .project
-target/classes/com/scoopit/client/ScoopApi.class
-target/classes/com/scoopit/client/ScoopApiExecutionException.class
-target/classes/com/scoopit/client/ScoopClient$TopicOrder.class
-target/classes/com/scoopit/client/ScoopClient.class
-target/classes/com/scoopit/example/GetTopicAndUser.class
-target/classes/com/scoopit/model/AbstractModel.class
-target/classes/com/scoopit/model/Post.class
-target/classes/com/scoopit/model/PostComment.class
-target/classes/com/scoopit/model/Sharer.class
-target/classes/com/scoopit/model/Source.class
-target/classes/com/scoopit/model/Stats.class
-target/classes/com/scoopit/model/Topic.class
-target/classes/com/scoopit/model/TopicTag.class
-target/classes/com/scoopit/model/User.class
+target
