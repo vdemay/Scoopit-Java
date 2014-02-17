@@ -28,6 +28,8 @@ public class GetTopicAndUser {
         } catch (ScoopApiExecutionException e) {
             if (e.response.getCode() == 404) {
                 System.out.println("=> not found!");
+            } else {
+                throw e;
             }
         }
 
