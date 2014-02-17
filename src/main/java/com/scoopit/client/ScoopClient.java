@@ -7,8 +7,8 @@ import org.codehaus.jackson.JsonNode;
 import org.codehaus.jackson.JsonParseException;
 import org.codehaus.jackson.JsonParser;
 import org.codehaus.jackson.JsonProcessingException;
-import org.codehaus.jackson.annotate.JsonMethod;
 import org.codehaus.jackson.annotate.JsonAutoDetect.Visibility;
+import org.codehaus.jackson.annotate.JsonMethod;
 import org.codehaus.jackson.map.DeserializationConfig;
 import org.codehaus.jackson.map.JsonMappingException;
 import org.codehaus.jackson.map.ObjectMapper;
@@ -22,6 +22,7 @@ import org.scribe.oauth.OAuthService;
 import com.google.common.collect.LinkedListMultimap;
 import com.google.common.collect.Multimap;
 import com.scoopit.model.Post;
+import com.scoopit.model.ResolverResult;
 import com.scoopit.model.Topic;
 import com.scoopit.model.User;
 
@@ -271,4 +272,36 @@ public class ScoopClient {
 		}
 		return model;
 	}
+
+    // Resolver
+    private static String RESOLVER_ENDPOINT = "/api/1/resolver";
+
+    public Long resolveId(String shortName, ResolverResult.Type type) throws ScoopApiExecutionException {
+        Multimap<String, String> params = LinkedListMultimap.create();
+        if (type != null) {
+            params.put("type", type.toString());
+        } else {
+            params.put("type", "Topic");
+        }
+        params.put("shortName", shortName);
+        JsonNode root = doGet(RESOLVER_ENDPOINT, params);
+        if (root == null) {
+            return null;
+        }
+
+        ResolverResult model;
+        try {
+            model = mapper.readValue(root, ResolverResult.class);
+        } catch (JsonParseException e) {
+            e.printStackTrace();
+            return null;
+        } catch (JsonMappingException e) {
+            e.printStackTrace();
+            return null;
+        } catch (IOException e) {
+            e.printStackTrace();
+            return null;
+        }
+        return model.id;
+    }
 }

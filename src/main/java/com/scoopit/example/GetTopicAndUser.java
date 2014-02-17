@@ -21,5 +21,15 @@ public class GetTopicAndUser {
         User u = scoopit.getUser(0l);
         System.out.println(u);
 
+        System.out.println("============******===========");
+        System.out.println(scoopit.resolveId("fixies", Type.Topic));
+        try {
+            System.out.println(scoopit.resolveId("some-topic-that-should-,not-exists", Type.Topic));
+        } catch (ScoopApiExecutionException e) {
+            if (e.response.getCode() == 404) {
+                System.out.println("=> not found!");
+            }
+        }
+
     }
 }
