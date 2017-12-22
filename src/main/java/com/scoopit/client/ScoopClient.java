@@ -23,6 +23,7 @@ import com.google.common.collect.LinkedListMultimap;
 import com.google.common.collect.Multimap;
 import com.scoopit.model.Post;
 import com.scoopit.model.ResolverResult;
+import com.scoopit.model.SearchResults;
 import com.scoopit.model.Topic;
 import com.scoopit.model.User;
 
@@ -304,4 +305,36 @@ public class ScoopClient {
         }
         return model.id;
     }
+
+    private static String SEARCH_ENDPOINT="/api/1/search";
+
+	public SearchResults search(SearchType type, String query) throws ScoopApiExecutionException {
+		return search(type, query, 0, 50);
+	}
+
+	public SearchResults search(SearchType type, String query, int page, int count) throws ScoopApiExecutionException {
+		Multimap<String, String> params = LinkedListMultimap.create();
+		params.put("type", type.name());
+		params.put("query", query);
+		params.put("page", Integer.toString(page));
+		params.put("count", Integer.toString(count));
+
+		JsonNode root = doGet(SEARCH_ENDPOINT, params);
+		if (root == null) {
+			return null;
+		}
+		try {
+			return mapper.readValue(root, SearchResults.class);
+		} catch (JsonParseException e) {
+			e.printStackTrace();
+			return null;
+		} catch (JsonMappingException e) {
+			e.printStackTrace();
+			return null;
+		} catch (IOException e) {
+			e.printStackTrace();
+			return null;
+		}
+	}
+
 }
