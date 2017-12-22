@@ -3,6 +3,7 @@ package com.scoopit.example;
 import com.scoopit.client.ScoopApiExecutionException;
 import com.scoopit.client.ScoopClient;
 import com.scoopit.model.Post;
+import com.scoopit.model.ResolverResult.Type;
 import com.scoopit.model.Topic;
 import com.scoopit.model.User;
 
